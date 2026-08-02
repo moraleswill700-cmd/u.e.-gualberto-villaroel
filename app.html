@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuaderno Digital - Mis Apuntes</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Iconos de Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Tu archivo CSS propio (Corregido para estar en la misma carpeta) -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">
+                <i class="bi bi-journal-bookmark-fill me-2"></i>Cuaderno Digital
+            </a>
+            
+            <div class="d-flex align-items-center gap-2">
+                <span class="text-white small d-none d-sm-inline" id="userEmail">Cargando...</span>
+                <button class="btn btn-outline-light btn-sm" id="btnLogout">
+                    <i class="bi bi-box-arrow-right me-1"></i> Salir
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-4">
+        
+        <div class="row g-3 mb-4 align-items-center">
+            <div class="col-12 col-md-4">
+                <button class="btn btn-success w-100 py-2 fw-semibold shadow-sm" data-bs-toggle="modal" data-bs-target="#modalApunte">
+                    <i class="bi bi-plus-circle me-2"></i>Nuevo Apunte
+                </button>
+            </div>
+            
+            <div class="col-12 col-md-8">
+                <div class="input-group">
+                    <span class="input-group-text bg-white"><i class="bi bi-filter-square text-muted"></i></span>
+                    <select class="form-select" id="filtroMateria">
+                        <option value="todas">Todas las materias</option>
+                        <option value="matematicas">Matemáticas</option>
+                        <option value="lenguaje">Lenguaje y Comunicación</option>
+                        <option value="ciencias">Ciencias Naturales</option>
+                        <option value="historia">Historia y Sociales</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contenedor donde se cargarán dinámicamente tus apuntes -->
+        <div class="row g-3" id="contenedorApuntes">
+            <!-- Los apuntes cargados desde Firebase aparecerán aquí automáticamente -->
+        </div>
+    </div>
+
+    <!-- Modal para Agregar Apunte -->
+    <div class="modal fade" id="modalApunte" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title fw-bold"><i class="bi bi-journal-plus me-2"></i>Guardar Nuevo Apunte</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <form id="formApunte">
+                        <div class="row g-3">
+                            <div class="col-12 col-md-6">
+                                <label class="form-label font-weight-bold">Materia</label>
+                                <select class="form-select" id="materia" required>
+                                    <option value="" selected disabled>Selecciona una materia...</option>
+                                    <option value="matematicas">Matemáticas</option>
+                                    <option value="lenguaje">Lenguaje y Comunicación</option>
+                                    <option value="ciencias">Ciencias Naturales</option>
+                                    <option value="historia">Historia y Sociales</option>
+                                </select>
+                            </div>
+                            
+                            <div class="col-12 col-md-6">
+                                <label class="form-label">Título del Apunte</label>
+                                <input type="text" class="form-control" id="titulo" placeholder="Ej: Tema 2 - Álgebra" required>
+                            </div>
+
+                            <div class="col-12">
+                                <label class="form-label">Notas o resumen escrito</label>
+                                <textarea class="form-control" id="contenido" rows="4" placeholder="Escribe aquí tus apuntes principales..."></textarea>
+                            </div>
+
+                            <div class="col-12">
+                                <label class="form-label"><i class="bi bi-camera me-1"></i> Adjuntar Foto o PDF del cuaderno</label>
+                                <input class="form-control" type="file" id="archivo" accept="image/*,.pdf">
+                                <div class="form-text">Puedes subir una foto tomada con la cámara del celular o un archivo PDF.</div>
+                            </div>
+                        </div>
+
+                        <div class="mt-4 text-end">
+                            <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary px-4"><i class="bi bi-cloud-upload me-1"></i> Guardar en la Nube</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Conexión con tu lógica de JavaScript -->
+    <script type="module" src="app.js"></script>
+</body>
+</html>
