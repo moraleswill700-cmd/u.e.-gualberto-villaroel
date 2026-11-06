@@ -1,9 +1,9 @@
-// 1. Importar las funciones necesarias de SDKs de Firebase
+// 1. Importar SDKs necesarios de Firebase
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 import { getFirestore } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-// 2. Configuración de Firebase para el colegio Gualberto Villarroel
+// 2. Configuración oficial de Firebase del colegio
 const firebaseConfig = {
   apiKey: "AIzaSyDhCNip2K3eUyN4NUtnCB2Lj0c-VzqDCBI",
   authDomain: "ue-gualberto-v.firebaseapp.com",
@@ -13,7 +13,7 @@ const firebaseConfig = {
   appId: "1:538212569139:web:5dd7cdd998d48c72325346"
 };
 
-// 3. Inicializar Firebase y exportar servicios
+// 3. Inicializar la app y exportar los servicios para usarlos en app.js
 const app = initializeApp(firebaseConfig);
 
 export const auth = getAuth(app);

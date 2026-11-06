@@ -1,4 +1,4 @@
-// 1. Conexión con tu archivo de configuración (script.js)
+// Importar la conexión desde script.js
 import { auth, db } from './script.js';
 
 import { 
@@ -20,14 +20,14 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 // ==========================================
-// 1. MANEJO DE SESIÓN Y USUARIOS (LOGIN / REGISTRO)
+// 1. GESTIÓN DE SESIÓN Y AUTENTICACIÓN
 // ==========================================
 
 const loginForm = document.getElementById('loginForm');
 const toggleAuth = document.getElementById('toggleAuth');
 let esModoRegistro = false;
 
-// Cambiar entre Formulario de Login y Registro (en index.html)
+// Alternar entre Login y Registro en index.html
 if (toggleAuth) {
     toggleAuth.addEventListener('click', (e) => {
         e.preventDefault();
@@ -35,16 +35,16 @@ if (toggleAuth) {
         const btnSubmit = loginForm.querySelector('button[type="submit"]');
         
         if (esModoRegistro) {
-            btnSubmit.textContent = "Registrarse";
+            btnSubmit.innerHTML = '<i class="bi bi-person-plus me-1"></i> Crear Cuenta';
             toggleAuth.textContent = "Volver al Iniciar Sesión";
         } else {
-            btnSubmit.textContent = "Iniciar Sesión";
+            btnSubmit.innerHTML = '<i class="bi bi-box-arrow-in-right me-1"></i> Iniciar Sesión';
             toggleAuth.textContent = "Regístrate aquí";
         }
     });
 }
 
-// Evento de envío del formulario Login/Registro
+// Enviar formulario (Login o Registro)
 if (loginForm) {
     loginForm.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -54,31 +54,31 @@ if (loginForm) {
         try {
             if (esModoRegistro) {
                 await createUserWithEmailAndPassword(auth, email, password);
-                alert("¡Cuenta creada exitosamente! Entrando...");
+                alert("¡Cuenta creada exitosamente!");
             } else {
                 await signInWithEmailAndPassword(auth, email, password);
             }
             window.location.href = "app.html";
         } catch (error) {
-            alert("Error: " + error.message);
+            alert("Error de autenticación: " + error.message);
         }
     });
 }
 
-// Comprobar estado del usuario y proteger rutas
+// Proteger rutas y verificar estado del usuario
 onAuthStateChanged(auth, (user) => {
     const esPaginaApp = window.location.pathname.includes('app.html');
     
     if (user) {
-        // Usuario autenticado
         const userEmailSpan = document.getElementById('userEmail');
-        if (userEmailSpan) userEmailSpan.textContent = user.email;
+        if (userEmailSpan) {
+            userEmailSpan.innerHTML = `<i class="bi bi-person-circle me-1"></i> ${user.email}`;
+        }
         
         if (esPaginaApp) {
             cargarApuntes(user.uid);
         }
     } else {
-        // Si no está autenticado y está intentando entrar a app.html
         if (esPaginaApp) {
             window.location.href = "index.html";
         }
@@ -95,7 +95,7 @@ if (btnLogout) {
 }
 
 // ==========================================
-// 2. GUARDAR Y MOSTRAR APUNTES (FIRESTORE)
+// 2. FIRESTORE: GUARDAR Y LEER APUNTES
 // ==========================================
 
 const formApunte = document.getElementById('formApunte');
@@ -119,7 +119,6 @@ if (formApunte) {
                 fecha: serverTimestamp()
             });
 
-            // Limpiar y cerrar el modal de Bootstrap
             formApunte.reset();
             const modalElement = document.getElementById('modalApunte');
             const modal = bootstrap.Modal.getInstance(modalElement);
@@ -131,7 +130,7 @@ if (formApunte) {
     });
 }
 
-// Escuchar cambios en Firestore y renderizar en pantalla
+// Renderizar tarjetas de apuntes en app.html
 function cargarApuntes(uid) {
     const contenedor = document.getElementById('contenedorApuntes');
     if (!contenedor) return;
@@ -139,13 +138,14 @@ function cargarApuntes(uid) {
     const q = query(collection(db, "apuntes"), where("uid", "==", uid));
 
     onSnapshot(q, (snapshot) => {
-        contenedor.innerHTML = ""; // Limpiar contenedor
+        contenedor.innerHTML = ""; 
 
         if (snapshot.empty) {
             contenedor.innerHTML = `
                 <div class="col-12 text-center py-5 text-muted">
-                    <i class="bi bi-journal-x fs-1"></i>
-                    <p class="mt-2">No tienes apuntes guardados aún. Haz clic en <strong>"Nuevo Apunte"</strong> para agregar uno.</p>
+                    <i class="bi bi-journal-x fs-1 text-secondary"></i>
+                    <p class="mt-2 fw-semibold">No tienes apuntes guardados aún.</p>
+                    <p class="small text-muted">Haz clic en <strong>"Nuevo Apunte"</strong> para registrar uno.</p>
                 </div>
             `;
             return;
@@ -160,15 +160,15 @@ function cargarApuntes(uid) {
                     <div class="card h-100 shadow-sm border-0 tarjeta-apunte">
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-start mb-2">
-                                <span class="badge bg-primary text-capitalize">${data.materia}</span>
+                                <span class="badge bg-primary text-capitalize px-3 py-2 rounded-pill">${data.materia}</span>
                             </div>
                             <h5 class="card-title text-dark fw-bold">${data.titulo}</h5>
                             <p class="card-text text-secondary text-truncate-3">
-                                ${data.contenido || 'Sin contenido de texto...'}
+                                ${data.contenido || 'Sin contenido escrito...'}
                             </p>
                         </div>
-                        <div class="card-footer bg-transparent border-0 d-flex justify-content-end gap-2 pb-3">
-                            <button onclick="eliminarApunte('${id}')" class="btn btn-outline-danger btn-sm" title="Eliminar">
+                        <div class="card-footer bg-transparent border-0 d-flex justify-content-end pb-3">
+                            <button onclick="eliminarApunte('${id}')" class="btn btn-outline-danger btn-sm rounded-circle p-2" title="Eliminar Apunte">
                                 <i class="bi bi-trash"></i>
                             </button>
                         </div>
@@ -180,9 +180,9 @@ function cargarApuntes(uid) {
     });
 }
 
-// Función global para eliminar apunte
+// Función global para eliminar registros
 window.eliminarApunte = async (id) => {
-    if (confirm("¿Estás seguro de eliminar este apunte?")) {
+    if (confirm("¿Estás seguro de que deseas eliminar este apunte?")) {
         try {
             await deleteDoc(doc(db, "apuntes", id));
         } catch (error) {

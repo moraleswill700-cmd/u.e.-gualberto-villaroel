@@ -6,46 +6,75 @@
     <title>Cuaderno Digital - Iniciar Sesión</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Tu archivo CSS propio -->
+    <!-- Iconos de Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Archivo de estilos personalizados -->
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="d-flex align-items-center justify-content-center vh-100 bg-light">
+<body class="bg-login-page min-vh-100 d-flex align-items-center justify-content-center py-4">
 
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-12 col-sm-8 col-md-6 col-lg-4">
-                <div class="card shadow-sm border-0">
-                    <div class="card-body p-4">
-                        <div class="text-center mb-4">
-                            <h3 class="fw-bold text-primary">Cuaderno Digital</h3>
-                            <p class="text-muted small">Unidad Educativa Gualberto Villarroel</p>
+            <div class="col-12 col-md-10 col-lg-8 col-xl-7">
+                <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+                    <div class="row g-0">
+                        
+                        <!-- Columna Izquierda: Identidad Institucional -->
+                        <div class="col-md-5 bg-institucional p-4 d-flex flex-column justify-content-center align-items-center text-center text-white">
+                            <img src="img/logo.jpg.jpeg" alt="Escudo UE Gualberto Villarroel" class="img-fluid logo-escudo mb-3 shadow-sm">
+                            <h5 class="fw-bold mb-1">U.E. GUALBERTO VILLARROEL</h5>
+                            <p class="small text-white-50 mb-0">Viluyo - Huanuni</p>
+                            <span class="badge bg-white text-dark mt-3 px-3 py-2 rounded-pill fw-semibold">Fundado en 1978</span>
                         </div>
 
-                        <form id="loginForm">
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Correo electrónico</label>
-                                <input type="email" class="form-control" id="email" placeholder="estudiante@colegio.com" required>
+                        <!-- Columna Derecha: Formulario de Acceso -->
+                        <div class="col-md-7 p-4 p-sm-5 bg-white">
+                            <div class="mb-4 text-center text-md-start">
+                                <h3 class="fw-bold text-dark mb-1">Cuaderno Digital</h3>
+                                <p class="text-muted small">Ingresa tus credenciales para acceder a tus apuntes.</p>
                             </div>
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Contraseña</label>
-                                <input type="password" class="form-control" id="password" placeholder="••••••••" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary w-100 py-2 mb-3">Iniciar Sesión</button>
-                        </form>
 
-                        <div class="text-center">
-                            <small class="text-muted">¿No tienes una cuenta? <a href="#" id="toggleAuth" class="text-decoration-none">Regístrate aquí</a></small>
+                            <form id="loginForm">
+                                <div class="mb-3">
+                                    <label for="email" class="form-label fw-semibold text-secondary">Correo Electrónico</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-light border-end-0"><i class="bi bi-envelope text-muted"></i></span>
+                                        <input type="email" class="form-control bg-light border-start-0" id="email" placeholder="estudiante@colegio.com" required>
+                                    </div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label for="password" class="form-label fw-semibold text-secondary">Contraseña</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-light border-end-0"><i class="bi bi-lock text-muted"></i></span>
+                                        <input type="password" class="form-control bg-light border-start-0" id="password" placeholder="••••••••" required>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-institucional w-100 py-2.5 mb-3 fw-bold shadow-sm">
+                                    <i class="bi bi-box-arrow-in-right me-1"></i> Iniciar Sesión
+                                </button>
+                            </form>
+
+                            <div class="text-center">
+                                <small class="text-muted">¿No tienes una cuenta? <a href="#" id="toggleAuth" class="text-institucional fw-bold text-decoration-none">Regístrate aquí</a></small>
+                            </div>
                         </div>
+
                     </div>
+                </div>
+                
+                <!-- Pie de página -->
+                <div class="text-center mt-3 text-white-50 small">
+                    <p class="mb-0">&copy; Cuaderno Digital Escolar — Unidad Educativa Gualberto Villarroel</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Bootstrap JavaScript -->
+    <!-- Script de Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Conexión con tu lógica de JavaScript -->
+    <!-- Script Principal -->
     <script type="module" src="app.js"></script>
 </body>
 </html>

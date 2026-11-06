@@ -1,20 +1,84 @@
+/* Variables de Colores Institucionales */
+:root {
+    --rojo-institucional: #d90429;
+    --azul-institucional: #0056b3;
+    --gris-fondo: #f4f6f9;
+}
+
 body {
-    background-color: #f4f6f9;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Fondo para la vista de login */
+.bg-login-page {
+    background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 50%, #415a77 100%);
+}
+
+/* Panel izquierdo del login con degrado institucional */
+.bg-institucional {
+    background: linear-gradient(180deg, var(--rojo-institucional) 0%, var(--azul-institucional) 100%);
+}
+
+.text-institucional {
+    color: var(--azul-institucional);
+}
+
+/* Botón principal */
+.btn-institucional {
+    background-color: var(--azul-institucional);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.btn-institucional:hover {
+    background-color: #003d80;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 86, 179, 0.3);
+}
+
+/* Sombra e interacción del logo */
+.logo-escudo {
+    max-width: 120px;
+    height: auto;
+    filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.3));
+    transition: transform 0.3s ease;
+}
+
+.logo-escudo:hover {
+    transform: scale(1.05);
+}
+
+/* Ajuste de entradas de texto */
+.form-control:focus, .form-select:focus {
+    box-shadow: none;
+    border-color: var(--azul-institucional);
+}
+
+.input-group-text {
+    border-color: #dee2e6;
+}
+
+.form-control {
+    border-color: #dee2e6;
+    border-radius: 8px;
+}
+
+/* Tarjetas de apuntes en app.html */
 .card {
-    border-radius: 12px;
+    border-radius: 16px;
 }
 
 .tarjeta-apunte {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    border-radius: 12px;
+    border-radius: 14px;
 }
 
 .tarjeta-apunte:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    transform: translateY(-5px);
+    box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.12) !important;
 }
 
 .text-truncate-3 {
@@ -22,25 +86,9 @@ body {
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;  
     overflow: hidden;
-    white-space: pre-line; /* Respeta los saltos de línea del estudiante */
+    white-space: pre-line;
 }
 
-.btn-primary {
-    border-radius: 8px;
-}
-
-.form-control:focus, .form-select:focus {
-    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
-}
-
-/* Ajustes para modales y detalles adicionales */
 .modal-content {
-    border-radius: 16px;
-}
-
-@media (max-width: 576px) {
-    .container {
-        padding-left: 15px;
-        padding-right: 15px;
-    }
+    border-radius: 18px;
 }
